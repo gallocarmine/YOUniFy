@@ -16,6 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+/**
+ * The {@code CommentVoteService} class handles the business logic for voting on comments.
+ * It manages the creation, modification, and deletion of votes, ensuring that the
+ * comment's vote count (CFU) is updated accordingly.
+ *
+ * @see it.younify.modules.sgtr.repository.CommentVoteRepository
+ * @see it.younify.modules.sgtr.repository.CommentRepository
+ */
 @Service
 @RequiredArgsConstructor
 public class CommentVoteService {
@@ -23,6 +31,20 @@ public class CommentVoteService {
     private final CommentVoteRepository commentVoteRepository;
     private final CommentRepository commentRepository;
 
+    /**
+     * Processes a vote request for a comment in a transactional context.
+     * <p>
+     * This method handles three main scenarios:
+     * <ul>
+     *     <li><b>New Vote:</b> If the user has not voted on the comment, a new vote is created.</li>
+     *     <li><b>Change Vote:</b> If the user votes differently (e.g., upvotes a previously downvoted comment), the existing vote is updated.</li>
+     *     <li><b>Remove Vote:</b> If the user casts the same vote again (e.g., upvotes an already upvoted comment), the vote is removed.</li>
+     * </ul>
+     * The comment's CFU count is adjusted based on the action taken.
+     *
+     * @param commentVoteRequest The request containing the comment ID and vote type.
+     * @throws ResourceNotFoundException if the specified comment does not exist.
+     */
     @Transactional(rollbackFor = Exception.class)
     public void vote(CommentVoteRequest commentVoteRequest){
 
@@ -95,10 +117,17 @@ public class CommentVoteService {
                     commentRepository.save(comment);
                 }
             }
-        } else throw new ResourceNotFoundException("Thread not found");
+        } else throw new ResourceNotFoundException("Comment not found");
     }
 
 
+    /**
+     * Handles the logic for changing or removing an existing vote.
+     *
+     * @param commentVote The existing vote to modify.
+     * @param accountVoteType The new vote type from the user.
+     * @param comment The comment being voted on.
+     */
     private void changeVote(CommentVote commentVote, VoteType accountVoteType, Comment comment){
 
 

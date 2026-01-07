@@ -15,13 +15,26 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 
 
+/**
+ * The {@code ThreadPostService} class is responsible for creating and persisting new threads.
+ * It handles the logic of associating a new thread with its author, who can be either a
+ * {@link User} or a {@link Host}.
+ *
+ * @see it.younify.modules.sgtr.repository.ThreadRepository
+ */
 @Service
 @RequiredArgsConstructor
 public class ThreadPostService {
 
     private final ThreadRepository threadRepository;
-    private final CensorshipService censorshipService;
 
+    /**
+     * Creates and saves a new thread in a transactional context.
+     * This method determines the author of the thread from the current security context
+     * and persists a new {@link Threads} entity.
+     *
+     * @param threadPostRequest The request containing the thread's content and hsi flag.
+     */
     @Transactional(rollbackFor = Exception.class)
     public void post(@NotNull ThreadPostRequest threadPostRequest) {
 

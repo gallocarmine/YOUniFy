@@ -16,6 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+/**
+ * The {@code ThreadVoteService} class handles the business logic for voting on threads.
+ * It manages the creation, modification, and deletion of votes, ensuring that the
+ * thread's vote count (CFU) is updated accordingly.
+ *
+ * @see it.younify.modules.sgtr.repository.ThreadVoteRepository
+ * @see it.younify.modules.sgtr.repository.ThreadRepository
+ */
 @Service
 @RequiredArgsConstructor
 public class ThreadVoteService {
@@ -23,6 +31,20 @@ public class ThreadVoteService {
     private final ThreadVoteRepository threadVoteRepository;
     private final ThreadRepository threadRepository;
 
+    /**
+     * Processes a vote request for a thread in a transactional context.
+     * <p>
+     * This method handles three main scenarios:
+     * <ul>
+     *     <li><b>New Vote:</b> If the user has not voted on the thread, a new vote is created.</li>
+     *     <li><b>Change Vote:</b> If the user votes differently (e.g., upvotes a previously downvoted thread), the existing vote is updated.</li>
+     *     <li><b>Remove Vote:</b> If the user casts the same vote again (e.g., upvotes an already upvoted thread), the vote is removed.</li>
+     * </ul>
+     * The thread's CFU count is adjusted based on the action taken.
+     *
+     * @param threadVoteRequest The request containing the thread ID and vote type.
+     * @throws ResourceNotFoundException if the specified thread does not exist.
+     */
     @Transactional(rollbackFor = Exception.class)
     public void vote(ThreadVoteRequest threadVoteRequest){
 
@@ -99,6 +121,13 @@ public class ThreadVoteService {
     }
 
 
+    /**
+     * Handles the logic for changing or removing an existing vote.
+     *
+     * @param threadsVote The existing vote to modify.
+     * @param accountVoteType The new vote type from the user.
+     * @param thread The thread being voted on.
+     */
     private void changeVote(ThreadsVote threadsVote, VoteType accountVoteType, Threads thread){
 
 

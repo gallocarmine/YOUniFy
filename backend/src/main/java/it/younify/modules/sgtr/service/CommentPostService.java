@@ -17,6 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.Optional;
 
+/**
+ * The {@code CommentPostService} class is responsible for creating and persisting new comments on threads.
+ * It handles the logic of associating a new comment with its parent thread and its author,
+ * who can be either a {@link User} or a {@link Host}.
+ *
+ * @see it.younify.modules.sgtr.repository.CommentRepository
+ * @see it.younify.modules.sgtr.repository.ThreadRepository
+ */
 @Service
 @RequiredArgsConstructor
 public class CommentPostService {
@@ -24,6 +32,14 @@ public class CommentPostService {
     private final ThreadRepository threadRepository;
     private final CommentRepository commentRepository;
 
+    /**
+     * Creates and saves a new comment in a transactional context.
+     * This method first finds the parent thread and then determines the author of the comment
+     * from the current security context before persisting a new {@link Comment} entity.
+     *
+     * @param commentPostRequest The request containing the comment's content and parent thread ID.
+     * @throws ResourceNotFoundException if the parent thread with the given ID does not exist.
+     */
     @Transactional(rollbackFor = Exception.class)
     public void post(@NotNull CommentPostRequest commentPostRequest) {
 
