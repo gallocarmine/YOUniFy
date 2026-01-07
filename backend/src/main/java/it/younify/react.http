@@ -1,8 +1,0 @@
-POST http://localhost:8080/api/thread/utility/refresh-censorship
-content-type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50SWQiOiJVLTdkM2VkY2Y1LTE5OGUtNGJlNy1iMzBhLWJiMzZhOTQ2YWRhOSIsInVzZXJUeXBlIjoiU1RVREVOVCIsInN1YiI6InlvdW5pZnl0ZXN0ZXJAZ21haWwuaXQiLCJpYXQiOjE3Njc3MDIxMjgsImV4cCI6MTc2NzcwMzAyOH0.k2UUfRELI6S7i_NrshQlB9iEiVuX9-CVqRxSOI5RU78
-
-{
-
-}
-

@@ -1,9 +1,0 @@
-POST http://localhost:8080/api/thread/post
-content-type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50SWQiOiJILTRmNjhhY2U2LWE3ODEtNDYwMi1iNzkzLWViYzM2YTE3NjJlYiIsInVzZXJUeXBlIjoiSE9TVCIsInN1YiI6Im9wZW5hcGlAbGVnYWxtYWlsLml0IiwiaWF0IjoxNzY3Njk5OTcwLCJleHAiOjE3Njc3MDA4NzB9.OX7GwRAeYFsww_I3o1dTIJRi6a9D0rUzoepQBnFciBI
-
-{
-  "content": "salvatore scemo",
-  "flag": "Cs"
-}
-

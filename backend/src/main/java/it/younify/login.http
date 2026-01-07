@@ -1,7 +1,0 @@
-POST http://localhost:8080/api/auth/login
-content-type: application/json
-
-{
-  "email": "younifytester@gmail.it",
-  "password": "6%6?&V+&e^=#mYmv$"
-}

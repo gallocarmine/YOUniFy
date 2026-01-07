@@ -3,6 +3,10 @@ package it.younify.modules.sgtr.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * The {@code FlagCategory} enum represents the different categories or topics that a thread can be assigned.
+ * Each category has a human-readable label associated with it.
+ */
 @Getter
 @AllArgsConstructor
 public enum FlagCategory {
@@ -19,5 +23,8 @@ public enum FlagCategory {
     APERITIVO("Aperitivo"),
     NOTTE_ESAME("Notte prima degli esami");
 
-    private String label;
+    /**
+     * The human-readable label for the category, used for display purposes.
+     */
+    private final String label;
 }
